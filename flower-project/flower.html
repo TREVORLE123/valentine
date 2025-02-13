@@ -9,13 +9,18 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       background-color: #f0f8ff;
       margin: 0;
       overflow: hidden;
+      position: relative;
     }
 
     .rose-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -116,8 +121,8 @@
     @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
     .valentine-text {
-      position: absolute;
-      top: 30%;
+      position: fixed;
+      top: 25%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-family: 'Arial Black', 'Arial Bold', sans-serif;
@@ -161,20 +166,20 @@
     }
 
     .side-images {
-      position: absolute;
-      width: 200px;  /* Adjust size as needed */
-      height: 200px;  /* Adjust size as needed */
+      position: fixed;
+      width: 200px;
+      height: 200px;
       top: 50%;
       transform: translateY(-50%);
       z-index: 5;
     }
 
     .left-image {
-      left: 10%;
+      left: 15%;
     }
 
     .right-image {
-      right: 10%;
+      right: 15%;
     }
 
     .side-images img {
@@ -351,4 +356,4 @@
     setInterval(createHeart, 300); // Adjust timing here (currently creates a heart every 300ms)
   </script>
 </body>
-</htm
+</html>

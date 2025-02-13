@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centered Swaying Rose</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f8ff;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .rose-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: sway 4s ease-in-out infinite alternate;
+      transform-origin: bottom center;
+    }
+
+    .stem {
+      width: 12px;
+      height: 300px;
+      background: #3b7a57;
+      border-radius: 5px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 80%;
+      z-index: 1;
+    }
+
+    .leaf {
+      position: absolute;
+      width: 100px;
+      height: 50px;
+      background: linear-gradient(to right, #4CAF50, #81C784);
+      border-radius: 100% 0 100% 0;
+      transform-origin: center left;
+      z-index: 1;
+    }
+
+    .leaf.left {
+      top: 120px;
+      left: -40px;
+      transform: rotate(-30deg);
+    }
+
+    .leaf.right {
+      top: 120px;
+      right: -40px;
+      transform: rotate(30deg);
+    }
+
+    .rose {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin-bottom: -10px;
+    }
+
+    .petal {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, #ff5e78 40%, #ff2d55);
+      border-radius: 50%;
+      transform-origin: center center;
+      z-index: 2;
+      opacity: 0.9;
+    }
+
+    .petal-inner {
+      width: 120px;
+      height: 120px;
+      opacity: 0.95;
+    }
+
+    .petal:nth-child(1) { transform: rotate(0deg) translateY(-40px); z-index: 2; }
+    .petal:nth-child(2) { transform: rotate(45deg) translateY(-40px); z-index: 2; }
+    .petal:nth-child(3) { transform: rotate(90deg) translateY(-40px); z-index: 1; }
+    .petal:nth-child(4) { transform: rotate(135deg) translateY(-40px); z-index: 1; }
+    .petal:nth-child(5) { transform: rotate(180deg) translateY(-40px); z-index: 1; }
+    .petal:nth-child(6) { transform: rotate(225deg) translateY(-40px); z-index: 1; }
+    .petal:nth-child(7) { transform: rotate(270deg) translateY(-40px); z-index: 2; }
+    .petal:nth-child(8) { transform: rotate(315deg) translateY(-40px); z-index: 2; }
+
+    .center {
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, #ffd700, #f4c430);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+    }
+
+    @keyframes sway {
+      0% { transform: rotate(-5deg); }
+      100% { transform: rotate(5deg); }
+    }
+
+    @keyframes leafSway {
+      0% { transform: translateX(-10px) rotate(var(--rotation)) skew(-8deg); }
+      100% { transform: translateX(-10px) rotate(var(--rotation)) skew(-12deg); }
+    }
+
+    /* Add these new styles for the valentine text */
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+    .valentine-text {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Arial Black', 'Arial Bold', sans-serif;
+      font-size: 3em;
+      font-weight: 900;
+      color: #333333;
+      text-align: center;
+      -webkit-text-stroke: 3px #FF69B4;
+      letter-spacing: 2px;
+      text-shadow: 
+          0 0 0 #333333,
+          4px 4px 0px #FF69B4,
+          4px 4px 8px rgba(0,0,0,0.1);
+      animation: float 3s ease-in-out infinite;
+      z-index: 10;
+      padding: 10px;
+      border-radius: 15px;
+    }
+
+    /* Optional: Add heart decorations using pseudo-elements */
+    .valentine-text::before,
+    .valentine-text::after {
+      content: '♥';
+      color: white;
+      position: absolute;
+      font-size: 0.5em;
+      transform: translateY(-50%);
+    }
+
+    .valentine-text::before {
+      left: 10px;
+    }
+
+    .valentine-text::after {
+      right: 10px;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, -50%); }
+      50% { transform: translate(-50%, calc(-50% - 20px)); }
+    }
+
+    .side-images {
+      position: absolute;
+      width: 200px;  /* Adjust size as needed */
+      height: 200px;  /* Adjust size as needed */
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+    }
+
+    .left-image {
+      left: 10%;
+    }
+
+    .right-image {
+      right: 10%;
+    }
+
+    .side-images img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;  /* Optional: rounds the corners */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Optional: adds subtle shadow */
+    }
+
+    /* Add styles for floating hearts */
+    .heart {
+      position: fixed;
+      font-size: 20px;
+      color: #FF69B4;
+      user-select: none;
+      cursor: default;
+      animation: float-heart 4s linear;
+    }
+
+    @keyframes float-heart {
+      0% {
+        opacity: 1;
+        transform: translateY(0) translateX(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100vh) translateX(20px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="valentine-text">Will you be my valentine?</h1>
+  
+  <!-- Add the images -->
+  <div class="side-images left-image">
+    <img src="9B1EE3A5-8587-4A96-B34F-099B97F0ACAA.jpeg" alt="Left">
+  </div>
+  
+  <div class="side-images right-image">
+    <img src="392CF1B6-7DA7-47D5-9DC5-A62C289DD609_1_105_c.jpeg" alt="Right">
+  </div>
+
+  <div class="rose-container">
+    <div class="rose">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="center"></div>
+    </div>
+    <div class="stem">
+      <div class="leaf left"></div>
+      <div class="leaf right"></div>
+    </div>
+  </div>
+
+  <script>
+    function createPeony() {
+      const peony = document.createElement('div');
+      peony.className = 'peony';
+      
+      // Create stem first
+      const stem = document.createElement('div');
+      stem.className = 'stem';
+      peony.appendChild(stem);
+      
+      // Create leaves with better positioning
+      const numberOfLeaves = 2; // Fixed number of leaves
+      for (let i = 0; i < numberOfLeaves; i++) {
+        const leaf = document.createElement('div');
+        leaf.className = 'leaf';
+        
+        // Position first leaf higher than second
+        const yPos = i === 0 ? 40 : 70;  // First leaf at 40%, second at 70%
+        const xDirection = i === 0 ? 1 : -1;  // First leaf points right, second points left
+        
+        leaf.style.left = '50%';
+        leaf.style.top = `${yPos}%`;
+        leaf.style.transform = `
+          translateX(-10px)
+          rotate(${xDirection === 1 ? 0 : 180}deg)
+          skew(-10deg)
+        `;
+        
+        // Gentler sway animation
+        leaf.style.animation = `
+          fadeIn 3s ease forwards,
+          leafSway ${2 + Math.random()}s ease-in-out infinite alternate
+        `;
+        
+        peony.appendChild(leaf);
+      }
+      
+      // Create outer layer of petals
+      for (let i = 0; i < 8; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        
+        const angle = (i / 8) * 360;
+        const radius = 50;  // Outer petals radius
+        
+        petal.style.transform = `
+          rotate(${angle}deg) 
+          translate(${radius}px)
+          rotate(${angle}deg)
+        `;
+        
+        peony.appendChild(petal);
+      }
+      
+      // Create inner layer of petals
+      for (let i = 0; i < 6; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal petal-inner';
+        
+        const angle = ((i / 6) * 360) + 30; // Offset inner petals
+        const radius = 30;  // Inner petals closer to center
+        
+        petal.style.transform = `
+          rotate(${angle}deg) 
+          translate(${radius}px)
+          rotate(${angle}deg)
+        `;
+        
+        peony.appendChild(petal);
+      }
+      
+      // Create center last
+      const center = document.createElement('div');
+      center.className = 'center';
+      peony.appendChild(center);
+
+      // Position and scale
+      const x = Math.random() * 90 + 5;
+      const y = Math.random() * 70 + 5;
+      peony.style.left = `${x}%`;
+      peony.style.top = `${y}%`;
+      
+      const scale = 0.4 + Math.random() * 0.8;
+      peony.style.transform = `scale(${scale})`;
+      peony.style.animation = `sway ${3 + Math.random() * 2}s ease-in-out infinite alternate`;
+
+      return peony;
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '♥';
+      
+      // Random starting position
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.bottom = '0';
+      
+      // Random size
+      const size = Math.random() * 20 + 10;
+      heart.style.fontSize = size + 'px';
+      
+      document.body.appendChild(heart);
+      
+      // Remove heart after animation
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }
+
+    // Create hearts periodically
+    setInterval(createHeart, 300); // Adjust timing here (currently creates a heart every 300ms)
+  </script>
+</body>
+</htm

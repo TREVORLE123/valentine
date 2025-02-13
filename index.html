@@ -17,28 +17,27 @@
     }
 
     .rose-container {
-      position: fixed;
-      top: 50%;
+      position: absolute;
+      top: 55%;
       left: 50%;
       transform: translate(-50%, -50%);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       animation: sway 4s ease-in-out infinite alternate;
       transform-origin: bottom center;
       z-index: 2;
     }
 
     .stem {
-      position: absolute;
-      bottom: -150px;
-      left: 50%;
-      transform: translateX(-50%);
       width: 12px;
       height: 300px;
       background: #3b7a57;
       border-radius: 5px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 80%;
       z-index: 1;
     }
 
